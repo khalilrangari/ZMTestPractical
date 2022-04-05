@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+  <data>
+
+    <variable
+     name="viewModel"
+     type="com.android.zmtestkotlinwithmvvm.mainActivity.MainActivityViewModel" />
+
+    <import type="android.view.View" />
+  </data>
+
+  <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+   xmlns:app="http://schemas.android.com/apk/res-auto"
+   xmlns:tools="http://schemas.android.com/tools"
+   android:layout_width="match_parent"
+   android:layout_height="match_parent">
+
+    <androidx.core.widget.NestedScrollView
+     android:layout_width="match_parent"
+     android:layout_height="@dimen/zeroDp"
+     android:fillViewport="true"
+     android:scrollbars="none"
+     app:layout_constraintBottom_toTopOf="@+id/bottomNvgView"
+     app:layout_constraintTop_toTopOf="parent">
+
+      <androidx.constraintlayout.widget.ConstraintLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:background="@color/grayBackground">
+
+        <androidx.constraintlayout.widget.Guideline
+         android:id="@+id/glForVp"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:orientation="horizontal"
+         app:layout_constraintGuide_percent="0.35" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+         android:id="@+id/clSearch"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:background="@color/primaryColor"
+         android:padding="@dimen/sixteenDp"
+         app:layout_constraintTop_toTopOf="parent">
+
+          <androidx.appcompat.widget.AppCompatEditText
+           android:id="@+id/etSearch"
+           android:layout_width="match_parent"
+           android:layout_height="?actionBarSize"
+           android:background="@drawable/search_bg_with_round_corner"
+           android:drawableStart="@drawable/search_icon"
+           android:drawablePadding="@dimen/tenDp"
+           android:hint="@string/searchHintText"
+           android:paddingStart="@dimen/sixteenDp"
+           android:paddingEnd="@dimen/sixteenDp"
+           app:layout_constraintBottom_toBottomOf="parent"
+           app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.viewpager.widget.ViewPager
+         android:id="@+id/viewPager"
+         android:layout_width="match_parent"
+         android:layout_height="@dimen/zeroDp"
+         android:layout_marginTop="@dimen/tenDp"
+         android:background="@color/white"
+         app:autoScroll="true"
+         app:isInfinite="true"
+         app:layout_constraintBottom_toBottomOf="@+id/glForVp"
+         app:layout_constraintTop_toBottomOf="@+id/clSearch"
+         app:scrollInterval="5000" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+         android:id="@+id/tvRecommended"
+         style="@style/Text.16dp.Black"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_margin="@dimen/sixteenDp"
+         android:text="@string/recommended"
+         app:layout_constraintTop_toBottomOf="@+id/viewPager" />
+
+        <androidx.recyclerview.widget.RecyclerView
+         android:id="@+id/rvProductList"
+         android:layout_width="match_parent"
+         android:layout_height="@dimen/zeroDp"
+         android:layout_marginTop="@dimen/tenDp"
+         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+         app:layout_constraintTop_toBottomOf="@+id/tvRecommended"
+         app:layout_constraintBottom_toBottomOf="parent"
+         tools:itemCount="10"
+         tools:listitem="@layout/item_product_view" />
+
+      </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+     android:id="@+id/bottomNvgView"
+     android:layout_width="match_parent"
+     android:layout_height="?actionBarSize"
+     android:background="@color/white"
+     app:itemIconTint="@android:color/black"
+     app:itemTextColor="@android:color/black"
+     app:layout_constraintBottom_toBottomOf="parent"
+     app:menu="@menu/bottom_menu" />
+
+    <ProgressBar
+     android:id="@+id/progressBar"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:visibility="@{viewModel.isProgressBarVisible ? View.VISIBLE : View.GONE}"
+     app:layout_constraintBottom_toBottomOf="parent"
+     app:layout_constraintEnd_toEndOf="parent"
+     app:layout_constraintStart_toStartOf="parent"
+     app:layout_constraintTop_toTopOf="parent" />
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
